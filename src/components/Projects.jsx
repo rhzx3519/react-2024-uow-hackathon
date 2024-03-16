@@ -33,9 +33,18 @@ const styles = {
 const Projects = (props) => {
   const theme = useContext(ThemeContext);
   const { header } = props;
-  const [data, setData] = useState(null);
+  const [ data, setData ] = useState(null);
   const [showMore, setShowMore] = useState(false);
   const [ showChatBox, setShowChatBox ] = useState(false);
+
+
+  useEffect(() => {
+    if (showChatBox) {
+      document.documentElement.style.overflowY = 'hidden'
+    } else {
+      document.documentElement.style.overflowY = 'scroll'
+    }
+  }, [showChatBox]);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/v1/goods`, {
@@ -78,9 +87,11 @@ const Projects = (props) => {
         
       {showChatBox 
         ? (
-          <div style={styles.chatboxStyle}>
-            <ChatBox />
-          </div>
+          <Container>
+            <div style={styles.chatboxStyle}>
+              <ChatBox />
+            </div>
+          </Container>
         ) : (
           <div></div>
         )
