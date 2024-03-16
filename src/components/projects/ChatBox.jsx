@@ -8,27 +8,42 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import SendIcon from '@mui/icons-material/Send';
 
 
+const sendMessageToServer = async function (question) {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/v1/query`, {
+            method: "POST", // or 'PUT'
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({'question': question})
+        }).then(r => {
+            if (r.status !== 200) {
+                window.alert(r.status)
+                return
+            }
+            return r.json()
+        })
+        return response
+    } catch (e) {
+       console.log(e)
+    }
+}
+
+
 const Record = function (props) {
-    const { msg, user } = props
+    const { msg } = props
 
     const StyledBox = styled(Box)(({ }) => ({
         p: 1,
         borderRadius: 4,
         display: 'flex',
-        flexDirection: msg.from?.email === user.email ? 'row-reverse' : 'row',
+        flexDirection: msg.from === 1 ? 'row-reverse' : 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
     }));
 
     return <StyledBox>
         <Box>
-            <Typography
-                variant='subtitle2'
-                color='white'
-                sx={{ ml: 2 }}
-            >
-                {new Date(msg.created_at*1000).toLocaleString()}
-            </Typography>
             <Typography
                 variant='body1'
                 display="inline"
@@ -42,13 +57,14 @@ const Record = function (props) {
 }
 
 const MessageArea = function (props) {
-    const { messageHistory, scrollRef, user } = props
+    const { messageHistory, scrollRef } = props
 
+    console.log(messageHistory)
 
-    return   <Box sx={{ width: '100%', height: '87%', backgroundColor: '#25262b', my: 0.5 }}>
+    return <Box sx={{ width: '100%', height: '87%', backgroundColor: '#25262b', my: 0.5 }}>
         <Stack spacing={2} style={{maxHeight: "100%", overflow: 'auto'}}>
             {messageHistory.map(msg => (
-                <Record msg={msg} user={user}/>
+                <Record msg={msg} />
             ))}
             <Box ref={scrollRef} />
         </Stack>
@@ -56,7 +72,7 @@ const MessageArea = function (props) {
 }
 
 const InputArea = function (props) {
-    const { messageHistory, setChats, sendJsonMessage } = props
+    const { messageHistory, setChats } = props
 
     const handleInput = (e) => {
         if (e.key === 'Enter') {
@@ -66,7 +82,32 @@ const InputArea = function (props) {
             }
             e.target.value = ''
 
-            sendJsonMessage(msg)
+            setChats(messageHistory => [
+                ...messageHistory,
+                {
+                    from: 1,
+                    content: msg,
+                },
+            ])
+
+            fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/v1/query`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({'question': msg})
+              })
+            .then((res) => res.json())
+            .then((res) => {
+                setChats(messageHistory => [
+                    ...messageHistory,
+                    {
+                        from: 0,
+                        content: res.answer,
+                    },
+                ])
+            })
+            .catch((err) => err);
         }
     }
 
@@ -78,7 +119,32 @@ const InputArea = function (props) {
         }
         inputEle.value = ''
 
-        sendJsonMessage(msg)
+        setChats(messageHistory => [
+            ...messageHistory,
+            {
+                from: 1,
+                content: msg,
+            },
+        ])
+
+        fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/v1/query`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({'question': msg})
+          })
+        .then((res) => res.json())
+        .then((res) => {
+            setChats(messageHistory => [
+                ...messageHistory,
+                {
+                    from: 0,
+                    content: res.answer,
+                },
+            ])
+        })
+        .catch((err) => err);
     }
 
     return <Box sx={{
@@ -104,7 +170,6 @@ const InputArea = function (props) {
 }
 
 
-
 export default function ChatBox(props) {
     const { user } = props
     const [messageHistory, setMessageHistory] = useState([]);
@@ -116,8 +181,6 @@ export default function ChatBox(props) {
         }
     }, [messageHistory]);
 
-
-    const WS_URL = `wss://${window.location.hostname}${process.env.REACT_APP_CHAT_WEBSOCKET_PATH}/v1/ws/chat`
 
 
     return <Box sx={{ backgroundColor: '#25262b', height: '100vh', padding: 1,

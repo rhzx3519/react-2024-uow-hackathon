@@ -19,6 +19,15 @@ const styles = {
   showMoreStyle: {
     margin: 25,
   },
+  chatboxStyle: {
+    position: 'fixed',
+    opacity: 0.8,
+    width: '80%',
+    height: '80%',
+    left: '10%',
+    top: 60,
+    bottom: 0,
+  }
 };
 
 const Projects = (props) => {
@@ -26,7 +35,7 @@ const Projects = (props) => {
   const { header } = props;
   const [data, setData] = useState(null);
   const [showMore, setShowMore] = useState(false);
-  const { showChatBox, setShowChatBox } = useState(false);
+  const [ showChatBox, setShowChatBox ] = useState(false);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/v1/goods`, {
@@ -66,6 +75,17 @@ const Projects = (props) => {
             </Container>
           </div>
         ) : <FallbackSpinner /> }
+        
+      {showChatBox 
+        ? (
+          <div style={styles.chatboxStyle}>
+            <ChatBox />
+          </div>
+        ) : (
+          <div></div>
+        )
+      }
+
       <Box sx={{ 
         '& > :not(style)': { 
           m: 1, 
@@ -75,7 +95,9 @@ const Projects = (props) => {
         } 
         }}>
         <Fab color="primary" aria-label="add">
-          <AddIcon />
+          <AddIcon onClick={(e) => {
+            setShowChatBox(!showChatBox)
+          }}/>
         </Fab>
       </Box>
     </>
