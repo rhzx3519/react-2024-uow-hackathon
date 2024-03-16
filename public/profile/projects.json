@@ -1,0 +1,93 @@
+{
+    "projects" : [
+        {
+            "image" : "images/projects/a-key-and-lock-factory-upscaled.jpg",
+            "title": "Universal Key Generator",
+            "bodyText": "- A universal key generator service based on base64 code.\n - Two implementations, memory and mongo.\n - Access through http API.\n - Offline key generated and cache supported.",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/rhzx3519/unique-key-generator"
+                },
+                {
+                    "text": "Live",
+                    "href": "/"
+                }
+            ],
+            "tags" : [
+                "Go",
+                "Channel",
+                "System Design"
+            ]
+        },
+        {
+            "image" : "images/projects/stock-quote-list-including-aapl-tsla-nada-upscaled.jpg",
+            "title": "Stock Quote",
+            "bodyText": "- Online quote table.\n - Receive realtime stock quote from the server.\n - Using **MUI** to layout the table.",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/rhzx3519/react-demo-broker/tree/master/src/broker"
+                },
+                {
+                    "text": "Live",
+                    "href": "/"
+                }
+            ],
+            "tags" : [
+                "React",
+                "JavaScript",
+                "Stock"
+            ]
+        },
+        {
+            "image" : "images/projects/oneline-chatroom-like-discord-upscaled.jpg",
+            "title": "Online Chat Room",
+            "bodyText": "- A discord liked online chatroom.\n - Using flex to make the layout.\n - Based on websocket to connect to the server.",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/rhzx3519/react-demo-broker/tree/master/src/discord"
+                }
+            ],
+            "tags" : [
+                "React",
+                "JavaScript",
+                "Discord"
+            ]
+        },
+        {
+            "image" : "images/projects/a-lot-of-apple-widgets-including-weather-news-and-upscaled.jpg",
+            "title": "Weather, News, and TodoList Widgets",
+            "bodyText": "- Three online widgets.\n - All based on realtime online open API.\n - Using **MUI** as the basic React component library.",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/rhzx3519/entropy-task"
+                }
+            ],
+            "tags" : [
+                "React",
+                "JavaScript",
+                "Widget"
+            ]
+        },
+        {
+            "image": "images/projects/intertwined-threads.jpg",
+            "title": "Concurrency in Go",
+            "bodyText": "- Useful patterns when you write concurrent code in Go.\n - Using channels to access mysql in a sequential way.\n - Avoiding traps in the producer consumer pattern.",
+            "links": [
+                {
+                    "text": "GitHub",
+                    "href": "https://github.com/mayankagarwal09/mvvm-sample-app"
+                }
+            ],
+            "tags" : [
+                "Go",
+                "Concurrency",
+                "System Design",
+                "Design Pattern"
+            ]
+        }
+    ]
+}

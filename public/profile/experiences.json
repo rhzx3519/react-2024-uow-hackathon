@@ -1,0 +1,23 @@
+{
+    "experiences": [
+        {
+            "title": "Backend Software Developer",
+            "subtitle": "Hangzhou Youhu Technology",
+            "workType": "Full-time",
+            "workDescription": [
+                "Financial algorithm order system",
+                "Kubernetes cloud CI/CD platform"
+            ],
+            "dateText": "Apr.2020 - Feb.2023"
+        },
+        {
+            "title": "Intermediate Development Engineer",
+            "subtitle": "Netease Hangzhou Network Co.Ltd",
+            "workType": "Full-time",
+            "workDescription": [
+                "Racing mobile game app"
+            ],
+            "dateText": "Apr.2018 - Apr.2020"
+        }
+    ]
+}

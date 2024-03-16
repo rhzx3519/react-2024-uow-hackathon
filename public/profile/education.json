@@ -1,0 +1,32 @@
+{
+    "education":[
+        {
+            "title": "April 2018 - Sept. 2014",
+            "cardTitle": "Zhengjiang University",
+            "cardSubtitle": "Computer Science",
+            "icon" : {
+                "src": "images/education/Zhejiang.png"
+            },
+            "media": {
+                "name": "Zhejiang University",
+                "source": {
+                    "url": "images/education/Zhejiang.png"
+                },
+                "type": "IMAGE"
+            }
+        },
+        {
+            "title": "Sept. 2007 - June 2011",
+            "cardTitle": "Zhengjiang A&F University",
+            "cardSubtitle":"Computer Science",
+            "cardDetailedText": "",
+            "media": {
+                "name": "Zhejiang A&F University",
+                "source": {
+                    "url": "images/education/Zhejiang-AF-University.png"
+                },
+                "type": "IMAGE"
+            }
+        }
+    ]
+}

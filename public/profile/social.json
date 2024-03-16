@@ -1,0 +1,16 @@
+{
+    "social": [
+        {
+            "network" : "linkedin",
+            "href": "https://www.linkedin.com/in/zhenghao-lou-a9117421a/"
+        },
+        {
+            "network" : "github",
+            "href": "https://github.com/rhzx3519"
+        },
+        {
+            "network" : "email",
+            "href": "mailto:support@simple.com"
+        }
+    ]
+}
