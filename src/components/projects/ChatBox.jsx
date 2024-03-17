@@ -61,7 +61,7 @@ const MessageArea = function (props) {
 
     console.log(messageHistory)
 
-    return <Box sx={{ width: '100%', height: '87%', backgroundColor: '#25262b', my: 0.5 }}>
+    return <Box sx={{ width: '100%', height: '87%', backgroundColor: '#25262b',  overflowWrap: 'break-word', resize: 'none', my: 0.5 }}>
         <Stack spacing={2} style={{maxHeight: "100%", overflow: 'auto'}}>
             {messageHistory.map(msg => (
                 <Record msg={msg} />
@@ -86,7 +86,7 @@ const InputArea = function (props) {
                 ...messageHistory,
                 {
                     from: 1,
-                    content: msg,
+                    content: `${msg} :Q`,
                 },
             ])
 
@@ -103,7 +103,12 @@ const InputArea = function (props) {
                     ...messageHistory,
                     {
                         from: 0,
-                        content: res.answer,
+                        content: res.answer.split('\n').map((item, index) => (
+                            <React.Fragment key={index}>
+                                A: {item}
+                                <br />
+                            </React.Fragment>
+                        )),
                     },
                 ])
             })
@@ -147,16 +152,17 @@ const InputArea = function (props) {
         .catch((err) => err);
     }
 
-    return <Box sx={{
-        backgroundColor: "white",
-        padding: "0 10px",
-        borderRadius: "10px",
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '5.5%',
-        m: 1,
-    }}>
+    return <div style={{ marginBottom: "10px"}}>
+        <Box sx={{
+            backgroundColor: "white",
+            padding: "0 10px",
+            borderRadius: "10px",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '7%',
+            m: 1
+        }}>
             <AddCircleOutlineIcon style={{ cursor: 'pointer' }} fontSize='medium' sx={{
                 color: 'black',
                 mr: 1,
@@ -167,6 +173,7 @@ const InputArea = function (props) {
             }} onKeyDown={handleInput} />
             <SendIcon style={{ cursor: 'pointer' }} fontSize='medium' onClick={handleSendCLick} />
         </Box>
+    </div>
 }
 
 
